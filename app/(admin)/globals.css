@@ -1,0 +1,1448 @@
+/* Layout Structure */
+.admin-dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background-color: #2a2835;
+  color: white;
+  padding: 20px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.sidebar .logo {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 15px;
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+}
+
+/* Main Area */
+.main-area {
+  margin-left: 240px; /* Increased margin from 220px to 240px */
+  padding-left: 20px; /* Adds space between sidebar and content */
+  width: calc(100% - 240px);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f9fafb;
+}
+
+/* Header */
+.header {
+  background-color: #f3f4f6;
+  padding: 16px 24px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  padding: 24px;
+  background-color: #ffffff;
+  overflow-x: auto;
+  border-radius: 6px; /* optional: thoda styling */
+  box-shadow: 0 0 6px rgba(0,0,0,0.05); /* optional */
+}
+
+/* Footer */
+.footer {
+  background-color: #4f46e5;
+  padding: 16px 24px;
+  text-align: center;
+  border-top: 1px solid #ddd;
+  font-size: 14px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.login-button {
+  padding: 8px 16px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+
+
+/*      product    */
+
+
+/* 🔲 Container Box */
+.product-manager-container {
+  background-color: #f8f9fa;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 🔙 Back Button */
+.back-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+.back-button::before {
+  content: "🔙 ";
+}
+
+/* ➕ Add Button */
+.add-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.add-button::before {
+  content: "➕ ";
+}
+
+/* 📄 Export PDF */
+.pdf-button {
+  background-color: #495057;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+/* 📊 Export Excel */
+.excel-button {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+/* 📋 Table */
+.product-table {
+  width: 90%;
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 20px;
+  
+}
+
+.product-table thead {
+  background-color: #343a40;
+  color: white;
+}
+
+.product-table th,
+.product-table td {
+  padding: 12px 16px;
+  text-align: center;
+}
+
+.product-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* 🖊️ / 🗑️ Buttons group */
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+/* 🖊️ Edit */
+.action-button.edit {
+  background-color: #ffc107;
+  color: black;
+  font-weight: 600;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+/* 🗑️ Delete */
+.action-button.delete {
+  background-color: #dc3545;
+  color: white;
+  font-weight: 600;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.action-button.delete::before {
+  content: " ";
+}
+
+
+
+
+
+
+/* Add this to your App.css */
+
+.product-box {
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 25px;
+  margin: 30px auto;
+  max-width: 95%;
+}
+
+.back-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.add-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.export-btn {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.excel-btn {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.product-table thead tr {
+  background-color: #343a40;
+  color: white;
+}
+
+.product-table td, .product-table th {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.edit-btn {
+  background-color: gold;
+  color: black;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-right: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.delete-btn {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+
+.edit-product-form {
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-product-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.edit-product-form input,
+.edit-product-form textarea {
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.edit-product-form input:focus,
+.edit-product-form textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.edit-product-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.edit-product-form button {
+  background-color: #28a745;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.edit-product-form button:hover {
+  background-color: #218838;
+}
+
+
+
+
+.product-form {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.product-form input,
+.product-form textarea {
+  padding: 10px 14px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: border-color 0.3s;
+}
+
+.product-form input:focus,
+.product-form textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.product-form button {
+  background-color: #28a745;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.product-form button:hover {
+  background-color: #218838;
+}
+
+
+
+
+
+
+
+
+/* users */
+
+
+
+/* UsersPage Styling */
+
+.user-page {
+  max-width: 900px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.user-page h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #333;
+}
+
+.user-page button {
+  background-color: #0070f3;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.user-page button:hover {
+  background-color: #005bb5;
+}
+
+.user-page table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.user-page th,
+.user-page td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.user-page th {
+  background-color: #0070f3;
+  color: white;
+}
+
+.user-page tr:hover {
+  background-color: #f1f1f1;
+}
+
+.user-page td[colspan="5"] {
+  text-align: center;
+  font-style: italic;
+  color: #777;
+}
+
+.users-manager-container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #f8f9fa;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.users-manager-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.users-manager-container button {
+  padding: 8px 16px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.users-manager-container button:hover {
+  background-color: #0056b3;
+}
+
+.users-manager-container table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.users-manager-container th,
+.users-manager-container td {
+  padding: 12px 16px;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.users-manager-container th {
+  background-color: #343a40;
+  color: white;
+}
+
+.users-manager-container td button {
+  background-color: #28a745;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.users-manager-container td button:hover {
+  background-color: #218838;
+}
+
+
+
+/* Add User Page Styling */
+
+/* Add User Form Styling */
+.add-user-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 30px 40px;
+  background-color: #f4f8fb;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.add-user-container h2 {
+  text-align: center;
+  color: #2d3748;
+  font-size: 26px;
+  margin-bottom: 25px;
+}
+
+.user-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.user-form input {
+  padding: 12px 14px;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.user-form input:focus {
+  border-color: #3182ce;
+  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+  outline: none;
+}
+
+.user-form button {
+  padding: 12px;
+  background-color: #3182ce;
+  color: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.user-form button:hover {
+  background-color: #2563eb;
+}
+
+
+
+
+/* globals.css */
+
+.add-user-container {
+  padding: 40px;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.add-user-container h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  font-size: 28px;
+  color: #333;
+}
+
+.add-user-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.add-user-form input {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.add-user-form input:focus {
+  border-color: #0070f3;
+}
+
+.add-user-form button {
+  padding: 12px;
+  font-size: 16px;
+  background-color: #0070f3;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-user-form button:hover {
+  background-color: #0059c1;
+}
+
+
+
+
+.edit-user-form {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+.edit-user-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.edit-user-form input,
+.edit-user-form select {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+.edit-user-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-user-form button:hover {
+  background-color: #0056b3;
+}
+
+
+
+
+/* category */
+
+/* Add in your App.css or globals.css */
+
+.add-category-form {
+  max-width: 500px;
+  margin: 60px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.add-category-form:hover {
+  transform: scale(1.01);
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+}
+
+.add-category-form h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 28px;
+  color: #2c3e50;
+}
+
+.add-category-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.add-category-form input[type="text"] {
+  padding: 12px 16px;
+  font-size: 16px;
+  border-radius: 12px;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: 0.2s ease;
+}
+
+.add-category-form input[type="text"]:focus {
+  border-color: #0070f3;
+  box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.2);
+}
+
+.add-category-form button {
+  padding: 12px;
+  background-color: #0070f3;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-category-form button:hover {
+  background-color: #0056c1;
+}
+
+
+.category-manager-container {
+  max-width: 900px; /* Control width */
+  margin: 0 auto; /* Center horizontally */
+  padding: 30px;
+  background-color: #f9f9f9;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+/* Add this to App.css or your global CSS file */
+
+.category-manager-container {
+  padding: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.category-manager-container h2 {
+  text-align: right;
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+button {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-btn {
+  background-color: #28a745;
+  color: white;
+  margin-right: 10px;
+}
+.add-btn:hover {
+  background-color: #218838;
+}
+
+.export-pdf {
+  background-color: #343a40;
+  color: white;
+  margin-right: 10px;
+}
+.export-pdf:hover {
+  background-color: #23272b;
+}
+
+.export-excel {
+  background-color: #0d6efd;
+  color: white;
+}
+.export-excel:hover {
+  background-color: #0a58ca;
+}
+
+.category-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.category-table thead {
+  background-color: #343a40;
+  color: white;
+}
+
+.category-table th,
+.category-table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: left;
+  font-size: 14px;
+}
+
+.btn-edit {
+  background-color: #ffc107;
+  color: #000;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-weight: bold;
+  margin-right: 6px;
+}
+.btn-edit:hover {
+  background-color: #e0a800;
+}
+
+.btn-delete {
+  background-color: red;
+  color: white;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-weight: bold;
+}
+.btn-delete:hover {
+  background-color: #c82333;
+}
+
+
+
+
+.edit-category-form {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 30px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  background-color: #f9f9f9;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+}
+
+.edit-category-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.edit-category-form input,
+.edit-category-form textarea,
+.edit-category-form select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.edit-category-form input:focus,
+.edit-category-form textarea:focus,
+.edit-category-form select:focus {
+  border-color: #4f46e5; /* indigo */
+  outline: none;
+}
+
+.edit-category-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #4f46e5;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-category-form button:hover {
+  background-color: #3730a3;
+}
+
+
+
+
+/* admin login  */
+
+/* Login Page Styling */
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: white;
+  padding: 1rem;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  background-color: white;
+  padding: 2rem;
+}
+
+.login-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.login-header {
+  text-align: center;
+}
+
+.login-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.login-subtitle {
+  font-size: 1rem;
+  color: #666;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.error-message {
+  font-size: 0.85rem;
+  color: #dc2626;
+  margin-top: 0.2rem;
+}
+
+.submit-button {
+  width: 100%;
+  background-color: #2563eb;
+  color: white;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  padding: 0.7rem;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #1e40af;
+}
+
+.loading-icon {
+  margin-right: 0.5rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0); }
+  100% { transform: rotate(360deg); }
+}
+
+.login-links {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+.link-primary {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.link-primary:hover {
+  text-decoration: underline;
+}
+
+.signup-prompt {
+  margin-top: 0.5rem;
+}
+
+.center-text {
+  text-align: center;
+}
+
+
+
+
+
+
+/* Main Area */
+.main-area {
+  padding: 20px;
+  background: #f9f9f9;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #4e54c8, #8f94fb);
+  color: white;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Header Right User Area */
+.header-user {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* User Info (name + icon) */
+.user-info {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #ffffff;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: background 0.3s;
+}
+
+.user-info:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background-color: #ffffff;
+  color: #333;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  min-width: 180px;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.dropdown-menu p,
+.dropdown-menu a {
+  margin: 0;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: #333;
+  transition: background 0.2s;
+}
+
+.dropdown-menu p:hover,
+.dropdown-menu a:hover {
+  background-color: #f0f0f0;
+}
+
+/* Login Button */
+.login-btn {
+  background-color: #ffffff;
+  color: #4e54c8;
+  padding: 8px 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+}
+
+.login-btn:hover {
+  background-color: #e8e8ff;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* admin update password */
+
+/* UpdatePassword.css */
+
+.update-password-page {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.update-password-page h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.update-password-page input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.update-password-page input:focus {
+  border-color: #0070f3;
+}
+
+.update-password-page button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #0070f3;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.update-password-page button:hover {
+  background-color: #005ec2;
+}
+
+.update-password-page p {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.95rem;
+  color: green;
+}
+
+.success-message {
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+}
+
+/* admin profile */
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(to bottom right, #ebf8ff, #e0e7ff);
+}
+
+.profile-card,
+.profile-edit-form {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.profile-heading {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4f46e5;
+  margin-bottom: 1rem;
+}
+
+.profile-edit-btn {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #4f46e5;
+  color: white;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.profile-edit-btn:hover {
+  background-color: #4338ca;
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+}
+
+.input-disabled {
+  background-color: #e5e7eb;
+  cursor: not-allowed;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #059669;
+  color: white;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+  background-color: #047857;
+}
+
+.message {
+  margin-top: 1rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.message.success {
+  color: green;
+}
+
+.message.error {
+  color: red;
+}
+
+.profile-loading,
+.profile-error {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to right, #f0f4ff, #e3eaff);
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  border-radius: 1rem;
+}
+
+.login-content {
+  padding: 2rem;
+}
+
+.login-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.login-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #4f46e5;
+}
+
+.login-subtitle {
+  color: #6b7280;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-error {
+  font-size: 0.875rem;
+  color: #dc2626;
+  margin-top: 0.25rem;
+}
+
+.submit-btn {
+  background-color: #4f46e5;
+  color: white;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #4338ca;
+}
+
+.login-footer {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.forgot-link {
+  color: #4f46e5;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.signup-note {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+
+/* category back button */
+
+.back-button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.back-button:hover {
+  background-color: #e0e0e0;
+  border-color: #999;
+  color: #000;
+  transform: translateX(-2px);
+}
