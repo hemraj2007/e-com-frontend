@@ -1,4 +1,4 @@
-'use client';  
+'use client';
 
 import React, { useState } from 'react';
 
@@ -52,7 +52,7 @@ const ContactUs = () => {
       <div className="card">
         <h1 className="heading">Contact Us - eshop Website</h1>
         <p className="text">
-          "For any queries, suggestions, or feedback, please contact us. Your thoughts matter to us."
+          For any queries, suggestions, or feedback, please contact us. Your thoughts matter to us.
         </p>
 
         <div className="contact-info">
@@ -66,33 +66,33 @@ const ContactUs = () => {
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label className="form-label">Name:</label>
-            <input 
-              type="text" 
-              className="form-input" 
-              placeholder="Your Name" 
+            <input
+              type="text"
+              className="form-input"
+              placeholder="Your Name"
               value={name}
-              onChange={(e) => setName(e.target.value)} 
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
 
           <div className="form-group">
             <label className="form-label">Email:</label>
-            <input 
-              type="email" 
-              className="form-input" 
-              placeholder="Your Email" 
+            <input
+              type="email"
+              className="form-input"
+              placeholder="Your Email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)} 
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
           <div className="form-group">
             <label className="form-label">Message:</label>
-            <textarea 
-              className="form-textarea" 
-              placeholder="Your Message" 
+            <textarea
+              className="form-textarea"
+              placeholder="Your Message"
               value={message}
-              onChange={(e) => setMessage(e.target.value)} 
+              onChange={(e) => setMessage(e.target.value)}
             ></textarea>
           </div>
 
