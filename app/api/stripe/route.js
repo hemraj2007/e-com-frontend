@@ -1,17 +1,18 @@
 import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
 export async function POST(req) {
   try {
     const cartItems = await req.json();
 
     const lineItems = cartItems.map((item) => ({
       price_data: {
-        currency: 'inr', // ✅ INR for Indian Rupees
+        currency: 'inr',
         product_data: {
           name: item.name,
         },
-        unit_amount: Math.round(item.net_price * 100), // ✅ 234 INR → 23400 paisa
+        unit_amount: Math.round(item.net_price * 100),
       },
       quantity: item.quantity,
     }));
@@ -20,8 +21,8 @@ export async function POST(req) {
       payment_method_types: ['card'],
       line_items: lineItems,
       mode: 'payment',
-      success_url: 'http://localhost:3000/successPay',
-      cancel_url: 'http://localhost:3000/',
+      success_url: `${process.env.NEXT_PUBLIC_SUCCESS_URL}`,
+      cancel_url: `${process.env.NEXT_PUBLIC_CANCEL_URL}`,
     });
 
     return Response.json({ id: session.id });
@@ -29,5 +30,3 @@ export async function POST(req) {
     return Response.json({ error: error.message }, { status: 500 });
   }
 }
-
-
