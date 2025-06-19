@@ -1,36 +1,35 @@
-'use client';
+'use client'; // Client-side component hai ye
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineShopping } from 'react-icons/ai';
 import { HiOutlineTrash } from 'react-icons/hi';
 import toast from 'react-hot-toast';
 import { useStateContext } from '@/context/StateContext';
 import getStripe from '@/lib/getStripe';
-import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation'; // Navigation ke liye
 
 const Cart = () => {
   const cartRef = useRef();
-  const router = useRouter();
+  const router = useRouter(); // Router initialize kiya
+
+  // Context se user ka data bhi le rahe hain
   const { cartItems, totalPrice, totalQty, onRemove, toggleCartItemQuantity, user } = useStateContext();
 
-  // Automatic redirection based on auth status
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    
-    if (!token) {
-      router.push('/login');
-      toast.error('Please login to access your cart');
-    } else if (user && cartItems.length === 0) {
-      // If logged in but cart is empty, redirect to products page
-      router.push('/products');
-      toast('Your cart is empty, browse our products', { icon: '🛒' });
-    }
-  }, [user, cartItems.length, router]);
-
+  // Updated handleCheckout function with login check
   const handleCheckout = async () => {
+    // Pehle check karo user logged in hai ya nahi
+    if (!user) {
+      toast.error('Checkout karne ke liye pehle login karein');
+      router.push('/login'); // Login page pe redirect
+      return; // Yahan function ko rok do
+    }
+
+    // User logged in hai toh Stripe process continue karo
     try {
       const stripe = await getStripe();
-      toast.loading('Processing your checkout...');
+
+      // Loading message show karo
+      toast.loading('Checkout process shuru kar rahe hain...');
 
       const response = await fetch('/api/stripe', {
         method: 'POST',
@@ -39,51 +38,53 @@ const Cart = () => {
         },
         body: JSON.stringify({
           items: cartItems,
-          userId: user.id
+          userId: user.id // User ID bhi bhejo for server-side verification
         }),
       });
 
-      if (!response.ok) {
-        throw new Error('Checkout failed');
+      // Agar error aaya toh
+      if (response.statusCode === 500) {
+        toast.dismiss();
+        toast.error('Checkout process mein error aaya');
+        return;
       }
 
       const data = await response.json();
       toast.dismiss();
-      stripe.redirectToCheckout({ sessionId: data.id });
 
+      // Stripe checkout page pe redirect
+      stripe.redirectToCheckout({ sessionId: data.id });
     } catch (error) {
       toast.dismiss();
-      toast.error('Checkout failed. Please try again');
+      toast.error('Kuch toh gadbad hai! Phir se try karein');
       console.error('Checkout error:', error);
     }
   };
-
-  // If not logged in, this component will redirect before rendering
-  if (!user) {
-    return null; // Or a loading spinner
-  }
 
   return (
     <div className='cart-wrapper' ref={cartRef}>
       <h2>Shopping Cart</h2>
       <div className='cart-container'>
         <div className='cart-items'>
-          {cartItems.length < 1 ? (
+          {cartItems.length < 1 && (
             <div className='empty-cart'>
               <AiOutlineShopping size={150} />
               <h1>Your shopping bag is empty</h1>
               <button 
                 className='btn' 
-                onClick={() => router.push('/products')}
+                onClick={() => router.push('/')}
               >
-                Continue Shopping
+                Shopping continue karein
               </button>
             </div>
-          ) : (
+          )}
+
+          {cartItems.length >= 1 &&
             cartItems.map((item) => (
               <div key={item.id} className='item-card'>
                 <div className='item-image'>
-                  {/* Product image would go here */}
+                  {/* Product image (currently commented) */}
+                  {/* <img src={urlFor(item?.image[0])} alt='img' /> */}
                 </div>
 
                 <div className='item-details'>
@@ -98,7 +99,7 @@ const Cart = () => {
                     </button>
                   </div>
 
-                  <p className='item-tag'>{item.category || 'Product'}</p>
+                  <p className='item-tag'>Dress</p>
                   <p className='delivery-est'>Delivery Estimation</p>
                   <p className='delivery-days'>5 Working Days</p>
 
@@ -122,8 +123,7 @@ const Cart = () => {
                   </div>
                 </div>
               </div>
-            ))
-          )}
+            ))}
         </div>
 
         {cartItems.length >= 1 && (
@@ -131,19 +131,21 @@ const Cart = () => {
             <h3>Order Summary</h3>
             <div className='qty'>
               <p>Quantity</p>
-              <span>{totalQty} {totalQty > 1 ? 'Products' : 'Product'}</span>
+              <span>{totalQty} Product</span>
             </div>
             <div className='subtotal'>
               <p>Sub Total</p>
-              <span>₹{totalPrice.toLocaleString()}</span>
+              <span>₹{totalPrice}</span>
             </div>
-            <button 
-              className='btn' 
-              type='button' 
-              onClick={handleCheckout}
-            >
-              Proceed to Checkout
-            </button>
+            <div>
+              <button 
+                className='btn' 
+                type='button' 
+                onClick={handleCheckout}
+              >
+                Checkout Now
+              </button>
+            </div>
           </div>
         )}
       </div>
