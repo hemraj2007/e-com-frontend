@@ -16,39 +16,33 @@ export const UserProvider = ({ children }) => {
   // 3️⃣ Component mount hote hi user ka profile fetch karna
   useEffect(() => {
     const fetchProfile = async () => {
-      const token = localStorage.getItem("token"); // LocalStorage se JWT token fetch karna
+      const token = localStorage.getItem("token");
 
-      // 🔐 Agar token nahi mila to user authenticated nahi hai
       if (!token) {
-        setError("User not authenticated.");
         setLoading(false);
         return;
       }
 
       try {
-        // ✅ API call to fetch user profile
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/profile`, {
           headers: {
-            Authorization: `Bearer ${token}`, // Token header ke through bhejna
-            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
         });
 
-        const data = await res.json(); // Response ko JSON me convert karna
+        if (!res.ok) throw new Error("Profile fetch failed");
 
-        // ❌ Agar response ok nahi hai to error throw karo
-        if (!res.ok) throw new Error(data.detail || "Failed to fetch profile.");
-
-        setUserInfo(data); // ✅ User info set karo
+        const data = await res.json();
+        setUserInfo(data);
       } catch (err) {
-        setError(err.message || "Something went wrong."); // Catch block for error
+        localStorage.removeItem("token"); // Agar token invalid ho toh clear karo
       } finally {
-        setLoading(false); // Loading khatam ho gaya
+        setLoading(false);
       }
     };
 
-    fetchProfile(); // Mount pe fetch call
-  }, []);
+    fetchProfile();
+  }, []); // Empty dependency array ensures it runs only once
 
   // 4️⃣ Saare context values provide kar rahe hain
   return (
