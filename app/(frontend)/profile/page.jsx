@@ -1,52 +1,34 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { useUserContext } from "@/context/UserContext";
 
 export default function Profile() {
-  const [profile, setProfile] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const { userInfo: profile, setUserInfo, loading, error } = useUserContext();
   const [success, setSuccess] = useState("");
   const [editMode, setEditMode] = useState(false);
+  const [localError, setLocalError] = useState("");
 
-  const fetchProfile = async () => {
-    const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
-
-    if (!token) {
-      setError("User not authenticated.");
-      setLoading(false);
-      return;
-    }
-
-    try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/profile`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        const errorMessage = typeof data.detail === "string" ? data.detail : JSON.stringify(data);
-        throw new Error(errorMessage);
-      }
-
-      setProfile(data);
-    } catch (err) {
-      setError(err.message || "Something went wrong.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  // Additional fetch if needed (fallback)
   useEffect(() => {
-    fetchProfile();
-  }, []);
+    if (!profile && !loading && !error) {
+      const token = localStorage.getItem("token");
+      if (token) {
+        fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/profile`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        })
+          .then(res => res.json())
+          .then(data => setUserInfo(data))
+          .catch(err => setLocalError(err.message));
+      }
+    }
+  }, [profile, loading, error, setUserInfo]);
 
   const handleChange = (e) => {
-    setProfile({
+    setUserInfo({
       ...profile,
       [e.target.name]: e.target.value,
     });
@@ -54,18 +36,19 @@ export default function Profile() {
 
   const handleUpdate = async (e) => {
     e.preventDefault();
-    const token = typeof window !== "undefined" ? localStorage.getItem("token") : null;
-
-    if (!profile?.id) {
-      setError("User ID not found.");
+    setLocalError("");
+    setSuccess("");
+    
+    const token = localStorage.getItem("token");
+    if (!profile?.id || !token) {
+      setLocalError("User not authenticated");
       return;
     }
 
     try {
       const updateData = {
-        name: profile.name || undefined,  // Send undefined instead of null/empty
+        name: profile.name || undefined,
         mob_number: profile.mob_number || undefined,
-        // email: profile.email || undefined // Include if you want email updates
       };
 
       const res = await fetch(
@@ -82,34 +65,41 @@ export default function Profile() {
 
       if (!res.ok) {
         const errorData = await res.json();
-        const errorMessage = errorData.detail || "Update failed";
-        throw new Error(errorMessage);
+        throw new Error(errorData.detail || "Update failed");
       }
 
       const data = await res.json();
+      setUserInfo(data);
       setSuccess("✅ Profile updated successfully!");
-      setError("");
       setEditMode(false);
-      fetchProfile();
     } catch (err) {
-      setError(err.message);
-      setSuccess("");
+      setLocalError(err.message);
     }
   };
 
-  if (loading)
+  if (loading) {
     return (
       <div className="flex items-center justify-center h-screen">
         <p className="text-lg font-semibold">Loading profile...</p>
       </div>
     );
+  }
 
-  if (error)
+  if (error || localError) {
     return (
       <div className="flex items-center justify-center h-screen">
-        <p className="text-lg text-red-600 font-semibold">{error}</p>
+        <p className="text-lg text-red-600 font-semibold">{error || localError}</p>
       </div>
     );
+  }
+
+  if (!profile) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-lg font-semibold">No profile data found</p>
+      </div>
+    );
+  }
 
   return (
     <div className="profile-container">
@@ -138,7 +128,7 @@ export default function Profile() {
               <input
                 type="text"
                 name="name"
-                value={profile.name}
+                value={profile.name || ''}
                 onChange={handleChange}
                 className="form-input"
                 required
@@ -150,7 +140,7 @@ export default function Profile() {
               <input
                 type="tel"
                 name="mob_number"
-                value={profile.mob_number}
+                value={profile.mob_number || ''}
                 onChange={handleChange}
                 className="form-input"
                 placeholder="Enter your 10-digit mobile number"
@@ -165,7 +155,7 @@ export default function Profile() {
               <input
                 type="email"
                 name="email"
-                value={profile.email}
+                value={profile.email || ''}
                 disabled
                 className="form-input-disabled"
               />
@@ -177,7 +167,7 @@ export default function Profile() {
           </form>
 
           {success && <p className="form-success">{success}</p>}
-          {error && <p className="form-error">{error}</p>}
+          {localError && <p className="form-error">{localError}</p>}
         </div>
       )}
     </div>
